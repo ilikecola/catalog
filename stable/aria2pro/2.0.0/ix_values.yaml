@@ -70,5 +70,5 @@ additionalContainers:
     name: ariang
     image: "{{ .Values.ariangImage.repository }}:{{ .Values.ariangImage.tag }}"
     ports:
-      - containerPort: {{ .Values.service.main.ports.main.port }}
+      - containerPort: 6800
         name: main
