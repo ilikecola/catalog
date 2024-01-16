@@ -65,3 +65,10 @@ ariang:
 aria2pro:
   enabled: true
   path: "/jsonrpc"
+additionalContainers:
+  ariang:
+    name: ariang
+    image: "{{ .Values.ariangImage.repository }}:{{ .Values.ariangImage.tag }}"
+    ports:
+      - containerPort: {{ .Values.service.main.ports.main.port }}
+        name: main
