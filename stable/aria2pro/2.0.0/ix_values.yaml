@@ -69,14 +69,11 @@ workload:
           imageSelector: ariangImage
           probes:
             liveness:
-              type: http
-              path: /
+              type: tcp
             readiness:
-              type: http
-              path: /
+              type: tcp
             startup:
-              type: http
-              path: /
+              type: tcp
 persistence:
   config:
     enabled: true
