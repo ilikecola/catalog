@@ -27,10 +27,10 @@ maintainers:
   - name: TrueCharts
     email: info@truecharts.org
     url: https://truecharts.org
-name: aria2
+name: aria2pro
 sources:
   - https://github.com/P3TERX/Aria2-Pro-Docker
   - https://github.com/truecharts/charts/tree/master/charts/stable/aria2
   - https://hub.docker.com/r/p3terx/aria2-pro
 type: application
-version: 11.1.7
+version: 2.0.0
