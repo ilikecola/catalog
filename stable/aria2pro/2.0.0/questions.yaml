@@ -354,7 +354,7 @@ questions:
                             description: This port exposes the container port on the service
                             schema:
                               type: int
-                              default: 6800
+                              default: 6880
                               required: true
         - variable: rpc
           label: "Main RPC Service"
