@@ -1,5 +1,5 @@
 {{/* Make sure all variables are set properly */}}
-{{- include "tc.v1.common.loader.all" . }}
+{{- include "tc.v1.common.loader.init" . }}
 
 {{- $_ := set .Values.additionalContainers "ariang" (include "aria2.ariang" . | fromYaml) -}}
 
