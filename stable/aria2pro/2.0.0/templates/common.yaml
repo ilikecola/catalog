@@ -1,7 +1,7 @@
 {{/* Make sure all variables are set properly */}}
 {{- include "tc.v1.common.loader.init" . }}
 
-{{ - $_ := set .Values.additionalContainers "aria2prong" (include "aria2.ariang" . | fromYaml) -}}
+{{- $_ := set .Values.additionalContainers "aria2prong" (include "aria2.ariang" . | fromYaml) -}}
 
 {{/* inject aria2pro rpc path to all main ingress hosts*/}}
 {{- define "aria2pro.rpcinjector" -}}
