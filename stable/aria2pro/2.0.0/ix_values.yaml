@@ -35,9 +35,12 @@ service:
         protocol: tcp
 workload:
   main:
+    type: Deployment
     podSpec:
       containers:
         main:
+          enabled: true
+          primary: true
           probes:
             liveness:
               type: tcp
@@ -64,6 +67,16 @@ workload:
           enabled: true
           primary: true
           imageSelector: ariangImage
+          probes:
+            liveness:
+              type: http
+              path: /
+            readiness:
+              type: http
+              path: /
+            startup:
+              type: http
+              path: /
 persistence:
   config:
     enabled: true
@@ -76,10 +89,3 @@ ariang:
 aria2pro:
   enabled: true
   path: "/jsonrpc"
-# additionalContainers:
-#   ariang:
-#     name: ariang
-#     image: "{{ .Values.ariangImage.repository }}:{{ .Values.ariangImage.tag }}"
-#     ports:
-#       - containerPort: 6880
-#         name: main
