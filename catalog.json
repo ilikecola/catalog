@@ -2,23 +2,23 @@
     "charts": {},
     "test": {},
     "stable": {
-        "aria2": {
-            "app_readme": "<p>aria server for downloading web content</p>\n<p>This App is supplied by TrueCharts, for more information visit the manual: <a href=\"https://truecharts.org/charts/stable/aria2\">https://truecharts.org/charts/stable/aria2</a></p>\n<hr />\n<p>TrueCharts can only exist due to the incredible effort of our staff.\nPlease consider making a <a href=\"https://truecharts.org/sponsor\">donation</a> or contributing back to the project any way you can!</p>",
+        "aria2pro": {
+            "app_readme": "<p>aria2 pro server for downloading web content</p>\n<p>This App is supplied by TrueCharts, for more information visit the manual: <a href=\"https://truecharts.org/charts/stable/aria2\">https://truecharts.org/charts/stable/aria2</a></p>\n<hr />\n<p>TrueCharts can only exist due to the incredible effort of our staff.\nPlease consider making a <a href=\"https://truecharts.org/sponsor\">donation</a> or contributing back to the project any way you can!</p>",
             "categories": [
                 "media"
             ],
-            "description": "aria server for downloading web content",
+            "description": "aria2 pro server for downloading web content",
             "healthy": true,
             "healthy_error": null,
             "home": "https://truecharts.org/charts/stable/aria2",
-            "location": "/home/runner/work/catalog/catalog/stable/aria2",
-            "latest_version": "11.1.7",
+            "location": "/home/runner/work/catalog/catalog/stable/aria2pro",
+            "latest_version": "2.0.0",
             "latest_app_version": "latest",
-            "latest_human_version": "latest_11.1.7",
+            "latest_human_version": "latest_2.0.0",
             "last_update": "2024-01-14 06:23:56",
-            "name": "aria2",
+            "name": "aria2pro",
             "recommended": false,
-            "title": "Aria2",
+            "title": "Aria2pro",
             "maintainers": [
                 {
                     "name": "TrueCharts",
