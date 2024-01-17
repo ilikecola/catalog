@@ -16,15 +16,15 @@ service:
   main:
     ports:
       main:
-        port: 6880
+        port: 6800
         protocol: http
-  rpc:
+  ariang:
     enabled: true
     ports:
-      rpc:
+      ariang:
         enabled: true
-        port: 6800
-        targetPort: 6800
+        port: 6880
+        targetPort: 6880
         protocol: http
   listen:
     enabled: true
@@ -49,7 +49,7 @@ workload:
             startup:
               type: tcp
           env:
-            RPC_PORT: "{{ .Values.service.rpc.ports.rpc.port }}"
+            RPC_PORT: "{{ .Values.service.main.ports.main.port }}"
             LISTEN_PORT: "{{ .Values.service.listen.ports.listen.port }}"
             DISK_CACHE: 64M
             IPV6_MODE: false
