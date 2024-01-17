@@ -69,11 +69,17 @@ workload:
           imageSelector: ariangImage
           probes:
             liveness:
-              type: tcp
+              type: http
+              path: /
+              port: 6880
             readiness:
               type: tcp
+              path: /
+              port: 6880
             startup:
               type: tcp
+              path: /
+              port: 6880
 persistence:
   config:
     enabled: true
