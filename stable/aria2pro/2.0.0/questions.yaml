@@ -308,7 +308,7 @@ questions:
       attrs:
         - variable: main
           label: Main Service
-          description: The Primary service on which the healthcheck runs, often the webUI
+          description: The Primary RPC service on which the healthcheck runs, often the webUI
           schema:
             additional_attrs: true
             type: dict
@@ -354,11 +354,11 @@ questions:
                             description: This port exposes the container port on the service
                             schema:
                               type: int
-                              default: 6880
+                              default: 6800
                               required: true
-        - variable: rpc
-          label: "Main RPC Service"
-          description: "The Primary service on the RPC"
+        - variable: ariang
+          label: "AriaNG Service"
+          description: "The AriaNG service on the RPC"
           schema:
             additional_attrs: true
             type: dict
@@ -435,8 +435,8 @@ questions:
                   additional_attrs: true
                   type: dict
                   attrs:
-                    - variable: rpc
-                      label: "Main Service Port Configuration"
+                    - variable: ariang
+                      label: "AriaNG Service Port Configuration"
                       schema:
                         additional_attrs: true
                         type: dict
@@ -446,7 +446,7 @@ questions:
                             description: "This port exposes the container port on the service"
                             schema:
                               type: int
-                              default: 6800
+                              default: 6880
                               required: true
                           - variable: advanced
                             label: "Show Advanced settings"
@@ -481,7 +481,7 @@ questions:
                                   description: "The internal(!) port on the container the Application runs on"
                                   schema:
                                     type: int
-                                    default: 6800
+                                    default: 6880
         
         - variable: listen
           label: Listen Service
