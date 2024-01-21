@@ -7,5 +7,5 @@ pathType: Prefix
 service:
   # -- Overrides the service name reference for this path
   name: {{ printf "%s-rpc" $fullname }}
-  port: {{ .Values.service.main.ports.main.port }}
+  port: {{ .Values.service.rpc.ports.rpc.port }}
 {{- end -}}

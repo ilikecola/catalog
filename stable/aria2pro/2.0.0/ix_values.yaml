@@ -1,9 +1,9 @@
 image:
-  repository: p3terx/aria2-pro
+  repository: p3terx/ariang
   tag: latest
   pullPolicy: IfNotPresent
-ariangImage:
-  repository: p3terx/ariang
+aria2proImage:
+  repository: p3terx/aria2-pro
   tag: latest
   pullPolicy: IfNotPresent
 securityContext:
@@ -16,15 +16,15 @@ service:
   main:
     ports:
       main:
-        port: 6800
+        port: 6880
         protocol: http
-  ariang:
+  rpc:
     enabled: true
     ports:
-      ariang:
+      rpc:
         enabled: true
-        port: 6880
-        targetPort: 6880
+        port: 6800
+        targetPort: 6800
         protocol: http
   listen:
     enabled: true
@@ -48,14 +48,6 @@ workload:
               type: tcp
             startup:
               type: tcp
-          env:
-            RPC_PORT: "{{ .Values.service.main.ports.main.port }}"
-            LISTEN_PORT: "{{ .Values.service.listen.ports.listen.port }}"
-            DISK_CACHE: 64M
-            IPV6_MODE: false
-            UPDATE_TRACKERS: false
-            CUSTOM_TRACKER_URL: "https://trackerslist.com/all_aria2.txt"
-            RPC_SECRET: "ChangemeNow"
   ariang:
     enabled: true
     type: Deployment
@@ -66,20 +58,28 @@ workload:
         ariang:
           enabled: true
           primary: true
-          imageSelector: ariangImage
+          imageSelector: aria2proImage
+          env:
+            RPC_PORT: "{{ .Values.service.rpc.ports.rpc.port }}"
+            LISTEN_PORT: "{{ .Values.service.listen.ports.listen.port }}"
+            DISK_CACHE: 64M
+            IPV6_MODE: false
+            UPDATE_TRACKERS: true
+            CUSTOM_TRACKER_URL: "https://trackerslist.com/all_aria2.txt"
+            RPC_SECRET: "ChangemeNow"
           probes:
             liveness:
               type: http
               path: /
-              port: 6880
+              port: 6800
             readiness:
-              type: tcp
+              type: http
               path: /
-              port: 6880
+              port: 6800
             startup:
-              type: tcp
+              type: http
               path: /
-              port: 6880
+              port: 6800
 persistence:
   config:
     enabled: true
