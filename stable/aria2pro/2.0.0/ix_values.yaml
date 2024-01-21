@@ -41,21 +41,14 @@ workload:
         main:
           enabled: true
           primary: true
-          probes:
-            liveness:
-              type: tcp
-            readiness:
-              type: tcp
-            startup:
-              type: tcp
-  ariang:
+  aria2pro:
     enabled: true
     type: Deployment
     strategy: RollingUpdate
     replicas: 1
     podSpec:
       containers:
-        ariang:
+        aria2pro:
           enabled: true
           primary: true
           imageSelector: aria2proImage
@@ -70,16 +63,16 @@ workload:
           probes:
             liveness:
               type: http
-              path: /
-              port: 6800
+              path: /jsonrpc
+              port: "{{ .Values.service.rpc.ports.rpc.port }}"
             readiness:
               type: http
-              path: /
-              port: 6800
+              path: /jsonrpc
+              port: "{{ .Values.service.rpc.ports.rpc.port }}"
             startup:
               type: http
-              path: /
-              port: 6800
+              path: /jsonrpc
+              port: "{{ .Values.service.rpc.ports.rpc.port }}"
 persistence:
   config:
     enabled: true
