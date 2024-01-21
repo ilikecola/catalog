@@ -40,6 +40,13 @@ workload:
         main:
           enabled: true
           primary: true
+          probes:
+            liveness:
+              type: tcp
+            readiness:
+              type: tcp
+            startup:
+              type: tcp
   aria2pro:
     enabled: true
     type: Deployment
@@ -59,6 +66,19 @@ workload:
             UPDATE_TRACKERS: true
             CUSTOM_TRACKER_URL: "https://trackerslist.com/all_aria2.txt"
             RPC_SECRET: "ChangemeNow"
+          probes:
+            liveness:
+              type: http
+              path: /jsonrpc
+              port: "{{ .Values.service.rpc.ports.rpc.port }}"
+            readiness:
+              type: http
+              path: /jsonrpc
+              port: "{{ .Values.service.rpc.ports.rpc.port }}"
+            startup:
+              type: http
+              path: /jsonrpc
+              port: "{{ .Values.service.rpc.ports.rpc.port }}"
 persistence:
   config:
     enabled: true
