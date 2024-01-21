@@ -24,7 +24,6 @@ service:
       rpc:
         enabled: true
         port: 6800
-        targetPort: 6800
         protocol: http
   listen:
     enabled: true
