@@ -3,8 +3,8 @@
 image: {{ .Values.aria2proImage.repository }}:{{ .Values.aria2proImage.tag }}
 imagePullPolicy: '{{ .Values.aria2proImage.pullPolicy }}'
 securityContext:
-  runAsUser: {{ .Values.podSecurityContext.runAsUser }}
-  runAsGroup: {{ .Values.podSecurityContext.runAsGroup }}
+  runAsUser: {{ .Values.securityContext.runAsUser }}
+  runAsGroup: {{ .Values.securityContext.runAsGroup }}
   readOnlyRootFilesystem: {{ .Values.securityContext.readOnlyRootFilesystem }}
   runAsNonRoot: {{ .Values.securityContext.runAsNonRoot }}
 ports:
