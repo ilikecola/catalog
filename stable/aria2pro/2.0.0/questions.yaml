@@ -105,7 +105,7 @@ questions:
                                         schema:
                                           type: string
                                           private: true
-                                          default: ""
+                                          default: "ChangemeNow"
                                       - variable: DISK_CACHE
                                         label: Disk Cache
                                         description: Set up disk cache. SIZE can include K or M.

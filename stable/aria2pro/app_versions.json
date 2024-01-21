@@ -232,7 +232,7 @@
                                                                                             "schema": {
                                                                                                 "type": "string",
                                                                                                 "private": true,
-                                                                                                "default": ""
+                                                                                                "default": "ChangemeNow"
                                                                                             }
                                                                                         },
                                                                                         {
