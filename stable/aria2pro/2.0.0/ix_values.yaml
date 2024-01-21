@@ -47,41 +47,34 @@ workload:
               type: tcp
             startup:
               type: tcp
-  aria2pro:
-    enabled: true
-    type: Deployment
-    strategy: RollingUpdate
-    replicas: 1
-    podSpec:
-      containers:
-        aria2pro:
-          enabled: true
-          primary: true
-          imageSelector: aria2proImage
-          ports:
-            - containerPort: "{{ .Values.service.rpc.ports.rpc.port }}"
-              name: rpc 
-          env:
-            RPC_PORT: "{{ .Values.service.rpc.ports.rpc.port }}"
-            LISTEN_PORT: "{{ .Values.service.listen.ports.listen.port }}"
-            DISK_CACHE: 64M
-            IPV6_MODE: false
-            UPDATE_TRACKERS: true
-            CUSTOM_TRACKER_URL: "https://trackerslist.com/all_aria2.txt"
-            RPC_SECRET: "ChangemeNow"
-          probes:
-            liveness:
-              type: http
-              path: /jsonrpc
-              port: "{{ .Values.service.rpc.ports.rpc.port }}"
-            readiness:
-              type: http
-              path: /jsonrpc
-              port: "{{ .Values.service.rpc.ports.rpc.port }}"
-            startup:
-              type: http
-              path: /jsonrpc
-              port: "{{ .Values.service.rpc.ports.rpc.port }}"
+additionalContainers: 
+  aria2rpc:
+    name: aria2rpc
+    image: "{{ .Values.aria2proImage.repository }}:{{ .Values.aria2proImage.tag }}"
+    ports:
+      - containerPort: "{{ .Values.service.rpc.ports.rpc.port }}"
+        name: main 
+    env:
+      RPC_PORT: "{{ .Values.service.rpc.ports.rpc.port }}"
+      LISTEN_PORT: "{{ .Values.service.listen.ports.listen.port }}"
+      DISK_CACHE: 64M
+      IPV6_MODE: false
+      UPDATE_TRACKERS: true
+      CUSTOM_TRACKER_URL: "https://trackerslist.com/all_aria2.txt"
+      RPC_SECRET: "ChangemeNow"
+    probes:
+      liveness:
+        type: http
+        path: /jsonrpc
+        port: "{{ .Values.service.rpc.ports.rpc.port }}"
+      readiness:
+        type: http
+        path: /jsonrpc
+        port: "{{ .Values.service.rpc.ports.rpc.port }}"
+      startup:
+        type: http
+        path: /jsonrpc
+        port: "{{ .Values.service.rpc.ports.rpc.port }}"  
 persistence:
   config:
     enabled: true
@@ -91,6 +84,6 @@ portal:
     enabled: false
 ariang:
   enabled: true
-aria2pro:
+aria2rpc:
   enabled: true
   path: "/jsonrpc"

@@ -1,7 +1,7 @@
 {{/* Define path for aria2pro rpc */}}
 {{- define "aria2pro.rpc" -}}
 {{- $fullname := include "tc.v1.common.lib.chart.names.fullname" . -}}
-path: {{ .Values.aria2pro.path }}
+# -- path: {{ .Values.aria2rpc.path }}
 # -- Ignored if not kubeVersion >= 1.14-0
 pathType: Prefix
 service:
