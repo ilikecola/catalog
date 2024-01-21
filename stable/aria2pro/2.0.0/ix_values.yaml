@@ -58,6 +58,9 @@ workload:
           enabled: true
           primary: true
           imageSelector: aria2proImage
+          ports:
+            - containerPort: "{{ .Values.service.rpc.ports.rpc.port }}"
+              name: rpc 
           env:
             RPC_PORT: "{{ .Values.service.rpc.ports.rpc.port }}"
             LISTEN_PORT: "{{ .Values.service.listen.ports.listen.port }}"
