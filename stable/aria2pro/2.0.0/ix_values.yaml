@@ -75,7 +75,7 @@ workload:
             readOnlyRootFilesystem: false
             runAsNonRoot: false
           ports:
-            - containerPort: {{ .Values.service.ariang.ports.ariang.port }}
+            - containerPort: 6880
               name: main
           probes:
             liveness:
