@@ -3,10 +3,6 @@
 
 {{/* - $_ := set .Values.additionalContainers "ariang" (include "aria2pro.ariang" . | fromYaml) - */}}
 
-{{- if .Values.additionalContainers }}
-{{ toYaml .Values.additionalContainers.ariang }}
-{{- end }}
-
 {{/* inject aria2pro rpc path to all main ingress hosts*/}}
 {{- define "aria2pro.rpcinjector" -}}
 {{- $path := list (include "aria2pro.rpc" . | fromYaml) -}}
