@@ -64,6 +64,32 @@ workload:
               type: tcp
               path: /jsonrpc
               port: "{{ .Values.service.main.ports.main.port }}"
+      initContainers:
+         ariang:
+          enabled: true
+          type: init
+          imageSelector: "ariangImage"
+          securityContext:
+            runAsUser: {{ .Values.securityContext.container.runAsUser }}
+            runAsGroup: {{ .Values.securityContext.runAsGroup }}              
+            readOnlyRootFilesystem: {{ .Values.securityContext.container.readOnlyRootFilesystem }}
+            runAsNonRoot: {{ .Values.securityContext.container.runAsNonRoot }}
+          ports:
+            - containerPort: {{ .Values.service.ariang.ports.ariang.port }}
+              name: main
+          probes:
+            liveness:
+              type: tcp
+              path: /
+              port: "{{ .Values.service.ariang.ports.ariang.port }}"
+            readiness:
+              type: tcp
+              path: /
+              port: "{{ .Values.service.ariang.ports.ariang.port }}"
+            startup:
+              type: tcp
+              path: /
+              port: "{{ .Values.service.ariang.ports.ariang.port }}"
         # aria2rpc:
         #   name: aria2rpc
         #   image: "{{ .Values.aria2proImage.repository }}:{{ .Values.aria2proImage.tag }}"
@@ -92,32 +118,6 @@ workload:
         #       path: /jsonrpc
         #       port: "{{ .Values.service.rpc.ports.rpc.port }}"    
 
-additionalContainers:
-  ariang:
-    name: ariang
-    image: {{ .Values.ariangImage.repository }}:{{ .Values.ariangImage.tag }}
-    imagePullPolicy: '{{ .Values.ariangImage.pullPolicy }}'
-    securityContext:
-      runAsUser: {{ .Values.securityContext.container.runAsUser }}
-      runAsGroup: {{ .Values.securityContext.runAsGroup }}
-      readOnlyRootFilesystem: {{ .Values.securityContext.container.readOnlyRootFilesystem }}
-      runAsNonRoot: {{ .Values.securityContext.container.runAsNonRoot }}
-    ports:
-      - containerPort: {{ .Values.service.ariang.ports.ariang.port }}
-        name: main
-    probes:
-      liveness:
-        type: tcp
-        path: /
-        port: "{{ .Values.service.ariang.ports.ariang.port }}"
-      readiness:
-        type: tcp
-        path: /
-        port: "{{ .Values.service.ariang.ports.ariang.port }}"
-      startup:
-        type: tcp
-        path: /
-        port: "{{ .Values.service.ariang.ports.ariang.port }}"
 persistence:
   config:
     enabled: true
