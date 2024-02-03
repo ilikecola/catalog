@@ -91,6 +91,7 @@ workload:
         #       type: http
         #       path: /jsonrpc
         #       port: "{{ .Values.service.rpc.ports.rpc.port }}"    
+
 additionalContainers:
   ariang:
     name: ariang
