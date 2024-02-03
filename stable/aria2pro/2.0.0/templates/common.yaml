@@ -18,15 +18,15 @@ additionalContainers:
       liveness:
         type: tcp
         path: /
-        port: "{{ .Values.service.ariang.ports.main.port }}"
+        port: "{{ .Values.service.ariang.ports.ariang.port }}"
       readiness:
         type: tcp
         path: /
-        port: "{{ .Values.service.ariang.ports.main.port }}"
+        port: "{{ .Values.service.ariang.ports.ariang.port }}"
       startup:
         type: tcp
         path: /
-        port: "{{ .Values.service.ariang.ports.main.port }}"
+        port: "{{ .Values.service.ariang.ports.ariang.port }}"
 
 {{/* inject aria2pro rpc path to all main ingress hosts*/}}
 {{- define "aria2pro.rpcinjector" -}}
