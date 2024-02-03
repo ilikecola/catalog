@@ -92,18 +92,19 @@ workload:
         #       path: /jsonrpc
         #       port: "{{ .Values.service.rpc.ports.rpc.port }}"    
 additionalContainers:
-  - name: ariang
+  ariang:
+    name: ariang
     image: {{ .Values.ariangImage.repository }}:{{ .Values.ariangImage.tag }}
     imagePullPolicy: '{{ .Values.ariangImage.pullPolicy }}'
-  - securityContext:
+    securityContext:
       runAsUser: {{ .Values.securityContext.container.runAsUser }}
       runAsGroup: {{ .Values.securityContext.runAsGroup }}
       readOnlyRootFilesystem: {{ .Values.securityContext.container.readOnlyRootFilesystem }}
       runAsNonRoot: {{ .Values.securityContext.container.runAsNonRoot }}
-  - ports:
-    - containerPort: {{ .Values.service.ariang.ports.ariang.port }}
-      name: main
-  - probes:
+    ports:
+      - containerPort: {{ .Values.service.ariang.ports.ariang.port }}
+        name: main
+    probes:
       liveness:
         type: tcp
         path: /
