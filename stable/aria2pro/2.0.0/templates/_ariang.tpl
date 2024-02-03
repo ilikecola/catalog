@@ -1,12 +1,12 @@
 {{/* Define the ariang container */}}
 {{- define "aria2.ariang" -}}
-image: {{ .Values.aria2proImage.repository }}:{{ .Values.aria2proImage.tag }}
-imagePullPolicy: '{{ .Values.aria2proImage.pullPolicy }}'
+image: {{ .Values.ariangImage.repository }}:{{ .Values.ariangImage.tag }}
+imagePullPolicy: '{{ .Values.ariangImage.pullPolicy }}'
 securityContext:
-  runAsUser: {{ .Values.securityContext.runAsUser }}
+  runAsUser: {{ .Values.securityContext.container.runAsUser }}
   runAsGroup: {{ .Values.securityContext.runAsGroup }}
-  readOnlyRootFilesystem: {{ .Values.securityContext.readOnlyRootFilesystem }}
-  runAsNonRoot: {{ .Values.securityContext.runAsNonRoot }}
+  readOnlyRootFilesystem: {{ .Values.securityContext.container.readOnlyRootFilesystem }}
+  runAsNonRoot: {{ .Values.securityContext.container.runAsNonRoot }}
 ports:
-  - containerPort: {{ .Values.service.rpc.ports.rpc.port }}
+  - containerPort: {{ .Values.service.ariang.ports.ariang.port }}
 {{- end -}}
