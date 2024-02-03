@@ -81,15 +81,15 @@ workload:
             liveness:
               type: tcp
               path: /
-              port: "{{ .Values.service.ariang.ports.ariang.port }}"
+              port: 6880
             readiness:
               type: tcp
               path: /
-              port: "{{ .Values.service.ariang.ports.ariang.port }}"
+              port: 6880
             startup:
               type: tcp
               path: /
-              port: "{{ .Values.service.ariang.ports.ariang.port }}"
+              port: 6880
         # aria2rpc:
         #   name: aria2rpc
         #   image: "{{ .Values.aria2proImage.repository }}:{{ .Values.aria2proImage.tag }}"
