@@ -308,7 +308,7 @@ questions:
       attrs:
         - variable: main
           label: Main Service
-          description: The Primary AriaNG service on which the healthcheck runs, often the webUI
+          description: The Primary Aria2Pro service on which the healthcheck runs, often the webUI
           schema:
             additional_attrs: true
             type: dict
@@ -354,11 +354,11 @@ questions:
                             description: This port exposes the container port on the service
                             schema:
                               type: int
-                              default: 6880
+                              default: 6800
                               required: true
-        - variable: rpc
-          label: "Aria RPC Service"
-          description: "The Aria service on the RPC"
+        - variable: ariang
+          label: "AriaNG Service"
+          description: "The AriaNG service"
           schema:
             additional_attrs: true
             type: dict
@@ -393,8 +393,8 @@ questions:
                   additional_attrs: true
                   type: dict
                   attrs:
-                    - variable: main
-                      label: Main RPC Service Port Configuration
+                    - variable: ariang
+                      label: Main AriaNG Service Port Configuration
                       schema:
                         additional_attrs: true
                         type: dict
@@ -404,7 +404,7 @@ questions:
                             description: This port exposes the container port on the service
                             schema:
                               type: int
-                              default: 6800
+                              default: 6880
                               required: true
         - variable: listen
           label: Listen Service
