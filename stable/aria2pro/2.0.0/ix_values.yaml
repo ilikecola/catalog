@@ -1,9 +1,9 @@
 image:
-  repository: p3terx/ariang
+  repository: p3terx/ariang-pro
   tag: latest
   pullPolicy: IfNotPresent
-aria2proImage:
-  repository: p3terx/aria2-pro
+ariangImage:
+  repository: p3terx/ariang
   tag: latest
   pullPolicy: IfNotPresent
 securityContext:
@@ -16,14 +16,14 @@ service:
   main:
     ports:
       main:
-        port: 6880
+        port: 6800
         protocol: http
-  rpc:
+  ariang:
     enabled: true
     ports:
       rpc:
         enabled: true
-        port: 6800
+        port: 6880
         protocol: http
   listen:
     enabled: true
@@ -40,21 +40,11 @@ workload:
         main:
           enabled: true
           primary: true
-          probes:
-            liveness:
-              type: tcp
-            readiness:
-              type: tcp
-            startup:
-              type: tcp
-        aria2rpc:
-          name: aria2rpc
-          image: "{{ .Values.aria2proImage.repository }}:{{ .Values.aria2proImage.tag }}"
           ports:
-            - containerPort: "{{ .Values.service.rpc.ports.rpc.port }}"
-              name: main 
+            - containerPort: "{{ .Values.service.main.ports.main.port }}"
+              name: main
           env:
-            RPC_PORT: "{{ .Values.service.rpc.ports.rpc.port }}"
+            RPC_PORT: "{{ .Values.service.main.ports.main.port }}"
             LISTEN_PORT: "{{ .Values.service.listen.ports.listen.port }}"
             DISK_CACHE: 64M
             IPV6_MODE: false
@@ -63,17 +53,44 @@ workload:
             RPC_SECRET: "ChangemeNow"
           probes:
             liveness:
-              type: http
+              type: tcp
               path: /jsonrpc
-              port: "{{ .Values.service.rpc.ports.rpc.port }}"
+              port: "{{ .Values.service.main.ports.main.port }}"
             readiness:
-              type: http
+              type: tcp
               path: /jsonrpc
-              port: "{{ .Values.service.rpc.ports.rpc.port }}"
+              port: "{{ .Values.service.main.ports.main.port }}"
             startup:
-              type: http
+              type: tcp
               path: /jsonrpc
-              port: "{{ .Values.service.rpc.ports.rpc.port }}"    
+              port: "{{ .Values.service.main.ports.main.port }}"
+        # aria2rpc:
+        #   name: aria2rpc
+        #   image: "{{ .Values.aria2proImage.repository }}:{{ .Values.aria2proImage.tag }}"
+        #   ports:
+        #     - containerPort: "{{ .Values.service.rpc.ports.rpc.port }}"
+        #       name: main 
+        #   env:
+        #     RPC_PORT: "{{ .Values.service.rpc.ports.rpc.port }}"
+        #     LISTEN_PORT: "{{ .Values.service.listen.ports.listen.port }}"
+        #     DISK_CACHE: 64M
+        #     IPV6_MODE: false
+        #     UPDATE_TRACKERS: true
+        #     CUSTOM_TRACKER_URL: "https://trackerslist.com/all_aria2.txt"
+        #     RPC_SECRET: "ChangemeNow"
+        #   probes:
+        #     liveness:
+        #       type: http
+        #       path: /jsonrpc
+        #       port: "{{ .Values.service.rpc.ports.rpc.port }}"
+        #     readiness:
+        #       type: http
+        #       path: /jsonrpc
+        #       port: "{{ .Values.service.rpc.ports.rpc.port }}"
+        #     startup:
+        #       type: http
+        #       path: /jsonrpc
+        #       port: "{{ .Values.service.rpc.ports.rpc.port }}"    
 persistence:
   config:
     enabled: true
