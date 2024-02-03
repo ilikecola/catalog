@@ -1,5 +1,5 @@
 {{/* Define the ariang container */}}
-{{- define "aria2.ariang" -}}
+{{- define "aria2pro.ariang" -}}
 image: {{ .Values.ariangImage.repository }}:{{ .Values.ariangImage.tag }}
 imagePullPolicy: '{{ .Values.ariangImage.pullPolicy }}'
 securityContext:
