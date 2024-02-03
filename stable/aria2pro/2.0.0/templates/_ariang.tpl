@@ -9,4 +9,18 @@ securityContext:
   runAsNonRoot: {{ .Values.securityContext.container.runAsNonRoot }}
 ports:
   - containerPort: {{ .Values.service.ariang.ports.ariang.port }}
+    name: main
+probes:
+  liveness:
+    type: tcp
+    path: /
+    port: "{{ .Values.service.ariang.ports.main.port }}"
+  readiness:
+    type: tcp
+    path: /
+    port: "{{ .Values.service.ariang.ports.main.port }}"
+  startup:
+    type: tcp
+    path: /
+    port: "{{ .Values.service.ariang.ports.main.port }}"
 {{- end -}}
