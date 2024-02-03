@@ -70,10 +70,10 @@ workload:
           type: init
           imageSelector: "ariangImage"
           securityContext:
-            runAsUser: {{ .Values.securityContext.container.runAsUser }}
+            runAsUser: {{ .Values.securityContext.runAsUser }}
             runAsGroup: {{ .Values.securityContext.runAsGroup }}              
-            readOnlyRootFilesystem: {{ .Values.securityContext.container.readOnlyRootFilesystem }}
-            runAsNonRoot: {{ .Values.securityContext.container.runAsNonRoot }}
+            readOnlyRootFilesystem: {{ .Values.securityContext.readOnlyRootFilesystem }}
+            runAsNonRoot: {{ .Values.securityContext.runAsNonRoot }}
           ports:
             - containerPort: {{ .Values.service.ariang.ports.ariang.port }}
               name: main
