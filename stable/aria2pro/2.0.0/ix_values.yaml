@@ -21,7 +21,7 @@ service:
   ariang:
     enabled: true
     ports:
-      rpc:
+      ariang:
         enabled: true
         port: 6880
         protocol: http
