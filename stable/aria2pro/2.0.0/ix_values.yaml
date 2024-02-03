@@ -91,6 +91,31 @@ workload:
         #       type: http
         #       path: /jsonrpc
         #       port: "{{ .Values.service.rpc.ports.rpc.port }}"    
+additionalContainers:
+  - name: ariang
+    image: {{ .Values.ariangImage.repository }}:{{ .Values.ariangImage.tag }}
+    imagePullPolicy: '{{ .Values.ariangImage.pullPolicy }}'
+  - securityContext:
+      runAsUser: {{ .Values.securityContext.container.runAsUser }}
+      runAsGroup: {{ .Values.securityContext.runAsGroup }}
+      readOnlyRootFilesystem: {{ .Values.securityContext.container.readOnlyRootFilesystem }}
+      runAsNonRoot: {{ .Values.securityContext.container.runAsNonRoot }}
+  - ports:
+    - containerPort: {{ .Values.service.ariang.ports.ariang.port }}
+      name: main
+  - probes:
+      liveness:
+        type: tcp
+        path: /
+        port: "{{ .Values.service.ariang.ports.ariang.port }}"
+      readiness:
+        type: tcp
+        path: /
+        port: "{{ .Values.service.ariang.ports.ariang.port }}"
+      startup:
+        type: tcp
+        path: /
+        port: "{{ .Values.service.ariang.ports.ariang.port }}"
 persistence:
   config:
     enabled: true
